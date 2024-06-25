@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="60 seconds">
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    <timestamp key="byHour" datePattern="yyyy-MM-dd-HH"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{16} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>E:\log\school.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>E:\log\school.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <append>true</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}, [%thread], %p, %m%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.zqz.school" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="Application"/>
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <root>
+        <level value="info"/>
+        <appender-ref ref="Application"/>
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>
